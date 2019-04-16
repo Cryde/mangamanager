@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Admin / Edit / Auteur{% endblock %}
+
+{% block body %}
+    <h1>Editer un autheur</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-outline-primary">Envoyer</button>
+    {{ form_end(form) }}
+{% endblock %}

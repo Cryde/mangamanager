@@ -1,0 +1,14 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "form-signin-signon.css";
+
+body {
+    padding-top: 80px;
+    font-family: 'Lato', sans-serif;
+}
+
+.nav-item-divider {
+    background: #666;
+    width: 1px;
+    height: 24px;
+    margin: 10px;
+}

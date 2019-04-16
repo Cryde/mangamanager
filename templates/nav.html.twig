@@ -1,0 +1,49 @@
+
+{% set currentRoute = app.request.attributes.get('_route') %}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('app_home') }}">Manga Manager</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {{ currentRoute == 'app_home' ? 'active' : '' }} ml-lg-5">
+                    <a class="nav-link" href="{{ path('app_home') }}"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item {{ currentRoute == 'app_book' ? 'active' : '' }} ml-lg-3">
+                    <a class="nav-link" href="{{ path('app_book') }}"><i class="fas fa-search"></i> Rechercher</a>
+                </li>
+                {% if app.user %}
+                    <li class="nav-item {{ currentRoute == 'app_collection' ? 'active' : '' }} ml-lg-3">
+                        <a class="nav-link" href="{{ path('app_collection') }}"><i class="fas fa-book"></i> Ma collection</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                {% if app.user %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_admin') }}"><i class="fas fa-bolt"></i></a>
+                    </li>
+                {% endif %}
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
+                    </li>
+                    <li class="nav-item-divider d-lg-block d-none"></li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

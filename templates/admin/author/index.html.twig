@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin / Manga{% endblock %}
+
+{% block body %}
+    <a class="btn btn-outline-primary float-right" href="{{ path('admin_author_add') }}">Ajouter un auteur</a>
+    <h1>Listes des auteurs</h1>
+
+
+    <ul>
+    {% for author in authors %}
+        <li>
+            {{ author.name }} <a href="{{ path('admin_author_edit', {slug: author.slug}) }}">editer</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

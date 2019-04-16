@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin / Manga{% endblock %}
+
+{% block body %}
+
+    <h2>Manga</h2>
+
+    <p>
+        <a class="btn btn-outline-primary" href="{{ path('admin_book_list') }}">Liste</a><br/>
+        <a class="btn btn-outline-primary" href="{{ path('admin_book_add') }}">Ajouter</a>
+    </p>
+
+
+    <h2>Auteur</h2>
+
+    <p>
+        <a class="btn btn-outline-primary" href="{{ path('admin_author_list') }}">Liste</a><br/>
+        <a class="btn btn-outline-primary" href="{{ path('admin_author_add') }}">Ajouter</a>
+    </p>
+{% endblock %}

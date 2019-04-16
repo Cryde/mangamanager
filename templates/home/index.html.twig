@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manga Manager, la gestion de vos mangas plus facilement{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron mt-lg-5">
+        <h1 class="display-4">Manga Manager ?</h1>
+        <p class="lead">
+            Manga Manager permet de <strong>gérer votre liste de mangas</strong> de façon simple et efficace.<br/>
+            Vous pourrez sans soucis retrouver rapidement à quel numéro vous vous êtes arrêté.<br/>
+        </p>
+        <hr class="my-4">
+        <p>Le site est en amélioration constante, de nouvelles fonctionnalités arriveront petit à petit.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{{ path('app_todo') }}" role="button">Voir les futures
+                fonctionnalités</a>
+        </p>
+    </div>
+
+
+    <h2>Derniers manga ajoutés</h2>
+
+    <div class="row">
+        {% for book in books %}
+            <div class="col-lg-3 text-center">
+                {% include 'book/_book_display.html.twig' with {book: book} %}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

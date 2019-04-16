@@ -1,0 +1,6 @@
+<a href="{{ path('app_book_show', {slug: book.slug}) }}">
+    {{ book.title }}
+    {% if book.coverUrl %}
+        <img src="{{ book | cover_public_path }}" alt="{{ book.title }}" class="img-fluid"/>
+    {% endif %}
+</a>

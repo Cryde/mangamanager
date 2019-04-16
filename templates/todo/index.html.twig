@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Todo list{% endblock %}
+
+{% block body %}
+
+    <h1 class="mb-lg-5">Les choses qui sont planifiées</h1>
+
+    <h2 class="mb-lg-3">Site</h2>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Compte / user</li>
+        <li class="list-group-item">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">confirmation du compte (email)</li>
+                <li class="list-group-item">mot de passe oublié</li>
+            </ul>
+        </li>
+        <li class="list-group-item">Manga</li>
+        <li class="list-group-item">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ajouter les mangas qu'on a</li>
+                <li class="list-group-item">ajouter les numéros que l'on a</li>
+                <li class="list-group-item">pouvoir voter pour le numéro</li>
+                <li class="list-group-item">suggestion de manga</li>
+                <li class="list-group-item">trouver une/des source(s) de manga pour populer le site/app</li>
+                <li class="list-group-item">être avertis quand un nouveau manga sort</li>
+            </ul>
+        </li>
+        <li class="list-group-item">API</li>
+        <li class="list-group-item">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">liste des mangas</li>
+                <li class="list-group-item">liste de nos mangas</li>
+                <li class="list-group-item">ajouter un manga</li>
+                <li class="list-group-item">supprimer un manga</li>
+                <li class="list-group-item">voter pour un manga</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2 class="mb-lg-3 mt-lg-5">App</h2>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Attendre que les apis soient créées</li>
+    </ul>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <div class="row mt-5 text-center">
+        <div class="col-lg-4 offset-lg-4">
+            <h1 class="h3 mb-3 mb-lg-5 font-weight-normal">S'inscrire</h1>
+
+            {{ form_start(registrationForm, {attr: {class: 'form-signin'}}) }}
+            {{ form_widget(registrationForm.email) }}
+            {{ form_widget(registrationForm.username) }}
+            {{ form_widget(registrationForm.plainPassword) }}
+
+            <button class="btn btn-outline-success btn-block mt-lg-4"><i class="fas fa-user-plus"></i> S'inscrire</button>
+            {{ form_end(registrationForm) }}
+
+            <p class="or"><span>OU</span></p>
+
+            <a href="{{ path('app_login') }}" class="btn btn-outline-primary btn-block"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+        </div>
+    </div>
+{% endblock %}

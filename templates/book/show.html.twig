@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.title }} - Manga Manager{% endblock %}
+
+{% block body %}
+
+    <div class="clearfix mb-lg-5">
+    {% if app.user %}
+        {% if not user_book %}
+            <a href="" data-book-id="{{ book.id }}" class="btn btn-outline-primary float-right js-add-book-collection">Ajouter
+                à ma collection</a>
+        {% else %}
+            <span class="btn btn-outline-primary float-right">Déjà dans votre collection</span>
+        {% endif %}
+    {% endif %}
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-7">
+            <h1>{{ book.title }}</h1>
+            <h2>
+                {% for author in book.authors %}
+                    <a href="">{{ author.name }}</a>
+                {% endfor %}
+            </h2>
+            <p>{{ book.description }}</p>
+        </div>
+        <div class="col-lg-4 offset-1">
+            {% if book.coverUrl %}
+                <img src="{{ book | cover_public_path }}" alt="{{ book.title }}" class="img-fluid"/>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
