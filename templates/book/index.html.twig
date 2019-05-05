@@ -3,5 +3,12 @@
 {% block title %}Chercher un manga{% endblock %}
 
 {% block body %}
-<h1>Chercher un manga</h1>
+    <h1 class="mb-lg-5">Chercher un manga</h1>
+
+    <form name="book_search" method="post">
+        <input type="text" id="book_search_title" name="book_search[title]" required="required"
+               placeholder="Entrer le nom du manga ici" class="form-control-lg js-search-book form-control"/>
+    </form>
+
+    <div class="row js-results mt-lg-5 text-center"></div>
 {% endblock %}

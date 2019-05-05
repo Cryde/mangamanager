@@ -1,4 +1,3 @@
-
 export {handleAdd};
 
 function handleAdd() {
@@ -9,7 +8,11 @@ function handleAdd() {
 function handleAddToCollectionClick() {
   const element = document.querySelector('.js-add-book-collection');
 
-  element.addEventListener('click', function(e) {
+  if (!element) {
+    return;
+  }
+
+  element.addEventListener('click', function (e) {
     e.preventDefault();
 
     const bookId = this.getAttribute('data-book-id');
@@ -20,7 +23,6 @@ function handleAddToCollectionClick() {
     })
   });
 }
-
 
 
 function addToCollection(id) {

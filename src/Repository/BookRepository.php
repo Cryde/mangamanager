@@ -18,4 +18,14 @@ class BookRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Book::class);
     }
+
+    public function searchLike(string $title, $limit = 8)
+    {
+        return $this->createQueryBuilder('book')
+            ->where('book.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }
