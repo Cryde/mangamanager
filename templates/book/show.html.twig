@@ -32,4 +32,19 @@
             {% endif %}
         </div>
     </div>
+
+    <h2>Tome</h2>
+    <div class="row">
+        {% for tome in book.tomes %}
+            <div class="col-lg-2 text-center">
+                <a href="">
+                    {{ tome.title }}
+                    {% set cover = tome | cover_public_path %}
+                    {% if cover %}
+                        <img src="{{ cover }}" alt="{{ book.title }}" class="img-fluid"/>
+                    {% endif %}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

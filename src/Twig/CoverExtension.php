@@ -3,6 +3,7 @@
 namespace App\Twig;
 
 use App\Entity\Book;
+use App\Entity\Tome;
 use App\Service\CoverPublicPathConverter;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -26,10 +27,19 @@ class CoverExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param $value
+     *
+     * @return string|null
+     */
     public function getCoverPath($value)
     {
         if ($value instanceof Book) {
             return $this->coverPublicPathConverter->getCoverPathFromBook($value);
+        }
+
+        if($value instanceof Tome) {
+            return $this->coverPublicPathConverter->getCoverPathFromTome($value);
         }
 
         throw new \InvalidArgumentException('Object not supported');

@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Book;
+use App\Entity\Tome;
 
 class CoverPublicPathConverter
 {
@@ -38,6 +39,25 @@ class CoverPublicPathConverter
 
         return $this->removePublicDir($this->bookCoverPublicPath) . $book->getCoverPath();
     }
+
+    /**
+     * @param Tome $tome
+     *
+     * @return string|null
+     */
+    public function getCoverPathFromTome(Tome $tome)
+    {
+        if (!$tome->getCoverUrl()) {
+            return '';
+        }
+
+        if (!$tome->getCoverPath()) {
+            return $tome->getCoverUrl();
+        }
+
+        return $this->removePublicDir($this->tomeCoverPublicPath) . $tome->getCoverPath();
+    }
+
 
     private function removePublicDir(string $publicPath)
     {
