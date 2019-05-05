@@ -59,6 +59,21 @@ class Tome
      */
     private $book;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coverUrl;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coverPath;
+
+    public function __construct()
+    {
+        $this->creationDatetime = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -156,6 +171,30 @@ class Tome
     public function setBook(?Book $book): self
     {
         $this->book = $book;
+
+        return $this;
+    }
+
+    public function getCoverUrl(): ?string
+    {
+        return $this->coverUrl;
+    }
+
+    public function setCoverUrl(?string $coverUrl): self
+    {
+        $this->coverUrl = $coverUrl;
+
+        return $this;
+    }
+
+    public function getCoverPath(): ?string
+    {
+        return $this->coverPath;
+    }
+
+    public function setCoverPath(?string $coverPath): self
+    {
+        $this->coverPath = $coverPath;
 
         return $this;
     }
