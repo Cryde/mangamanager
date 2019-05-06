@@ -38,4 +38,4 @@ services:
     App\Service\CoverPublicPathConverter:
         arguments:
             $bookCoverPublicPath: '%env(APP_BOOK_COVER_PATH)%'
-            $tomeCoverPublicPath: '%env(APP_BOOK_COVER_PATH)%'
+            $tomeCoverPublicPath: '%env(APP_TOME_COVER_PATH)%'
