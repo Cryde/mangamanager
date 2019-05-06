@@ -39,7 +39,7 @@ class BookCoverDownloadCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription('Download all the covers that doesn\'t have been downloaded yet');
+        $this->setDescription('Download all the book covers that doesn\'t have been downloaded yet');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -57,6 +57,7 @@ class BookCoverDownloadCommand extends Command
                 $file = $this->bookCoverImageDownloader->download($book->getCoverUrl());
                 $book->setCoverPath($file->getFilename());
                 $this->entityManager->flush();
+                sleep(2);
             } catch (\Exception $e) {
                 // todo alert
             }

@@ -31,6 +31,10 @@ services:
         arguments:
             $path: '%kernel.project_dir%/%env(APP_BOOK_COVER_PATH)%'
 
+    App\Service\TomeCoverImageDownloader:
+        arguments:
+            $path: '%kernel.project_dir%/%env(APP_TOME_COVER_PATH)%'
+
     App\Service\CoverPublicPathConverter:
         arguments:
             $bookCoverPublicPath: '%env(APP_BOOK_COVER_PATH)%'
