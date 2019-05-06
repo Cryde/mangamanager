@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ tome.title }} - Manga Manager{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-7">
+            <h1>{{ tome.title }}</h1>
+            <p>{{ tome.description }}</p>
+        </div>
+        <div class="col-lg-4 offset-1">
+            {% set cover = tome | cover_public_path %}
+            {% if cover %}
+                <img src="{{ cover }}" alt="{{ tome.title }}" class="img-fluid"/>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

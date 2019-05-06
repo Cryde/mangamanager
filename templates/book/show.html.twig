@@ -37,7 +37,7 @@
     <div class="row">
         {% for tome in book.tomes %}
             <div class="col-lg-2 text-center">
-                <a href="">
+                <a href="{{ path('app_tome_show', {slug: tome.slug}) }}">
                     {{ tome.title }}
                     {% set cover = tome | cover_public_path %}
                     {% if cover %}
