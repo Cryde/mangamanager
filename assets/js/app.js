@@ -1,4 +1,5 @@
 
+import 'bootstrap/js/dist/collapse';
 import '../css/app.css';
 import 'whatwg-fetch';
 
