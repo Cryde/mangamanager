@@ -18,6 +18,6 @@ class HomeController extends AbstractController
      */
     public function index(BookRepository $bookRepository)
     {
-        return $this->render('home/index.html.twig', ['books' => $bookRepository->findBy([], ['creationDatetime' => 'desc'], 4)]);
+        return $this->render('home/index.html.twig', ['books' => $bookRepository->getRandom()]);
     }
 }

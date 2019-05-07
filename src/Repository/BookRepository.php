@@ -28,4 +28,18 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param int $limit
+     *
+     * @return mixed
+     */
+    public function getRandom($limit = 4)
+    {
+        return $this->createQueryBuilder('book')
+            ->addOrderBy('RAND()')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }
