@@ -24,7 +24,7 @@ class UserTome
      */
     private $user;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tome", inversedBy="userTomes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tome")
      * @ORM\JoinColumn(nullable=false)
      */
     private $tome;
