@@ -47,9 +47,15 @@ class User implements UserInterface
      */
     private $userBooks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserTome", mappedBy="user")
+     */
+    private $userTomes;
+
     public function __construct()
     {
         $this->userBooks = new ArrayCollection();
+        $this->userTomes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,6 +168,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($userBook->getUser() === $this) {
                 $userBook->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserTome[]
+     */
+    public function getUserTomes(): Collection
+    {
+        return $this->userTomes;
+    }
+
+    public function addUserTome(UserTome $userTome): self
+    {
+        if (!$this->userTomes->contains($userTome)) {
+            $this->userTomes[] = $userTome;
+            $userTome->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserTome(UserTome $userTome): self
+    {
+        if ($this->userTomes->contains($userTome)) {
+            $this->userTomes->removeElement($userTome);
+            // set the owning side to null (unless already changed)
+            if ($userTome->getUser() === $this) {
+                $userTome->setUser(null);
             }
         }
 

@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserTomeRepository")
+ * @ORM\Table(uniqueConstraints={
+ *        @ORM\UniqueConstraint(name="u_user_tome", columns={"user_id", "tome_id"})
+ * })
  */
 class UserTome
 {
@@ -15,39 +18,29 @@ class UserTome
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tome", inversedBy="userTomes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userTomes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Tome", inversedBy="userTomes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $tome;
-
     /**
      * @ORM\Column(type="datetime")
      */
     private $creationDatetime;
 
+    public function __construct()
+    {
+        $this->creationDatetime = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?Tome
-    {
-        return $this->user;
-    }
-
-    public function setUser(?Tome $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getTome(): ?Tome
@@ -70,6 +63,18 @@ class UserTome
     public function setCreationDatetime(\DateTimeInterface $creationDatetime): self
     {
         $this->creationDatetime = $creationDatetime;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
