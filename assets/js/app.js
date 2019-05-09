@@ -6,5 +6,7 @@ import 'whatwg-fetch';
 import collection from './collection/main';
 import book from './book/main';
 
-collection();
-book();
+document.addEventListener('DOMContentLoaded', function(){
+  collection();
+  book();
+}, false);
