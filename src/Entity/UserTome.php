@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserTomeRepository")
  * @ORM\Table(uniqueConstraints={
- *        @ORM\UniqueConstraint(name="u_user_tome", columns={"user_id", "tome_id"})
+ *        @ORM\UniqueConstraint(name="u_user_tome_book", columns={"user_id", "tome_id", "book_id"})
  * })
  */
 class UserTome
@@ -29,9 +29,16 @@ class UserTome
      */
     private $tome;
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Book")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $book;
+    /**
      * @ORM\Column(type="datetime")
      */
     private $creationDatetime;
+
+
 
     public function __construct()
     {
@@ -75,6 +82,18 @@ class UserTome
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }

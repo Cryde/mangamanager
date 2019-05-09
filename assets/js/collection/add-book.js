@@ -1,6 +1,6 @@
-export {handleAdd};
+export {handleAddBook};
 
-function handleAdd() {
+function handleAddBook() {
   handleAddToCollectionClick();
 }
 
@@ -19,7 +19,6 @@ function handleAddToCollectionClick() {
 
     addToCollection(bookId)
     .then(() => {
-
     })
   });
 }

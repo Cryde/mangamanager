@@ -5,18 +5,19 @@
 {% block body %}
 
     <div class="clearfix mb-lg-5">
-    {% if app.user %}
-        {% if not user_book %}
-            <a href="" data-book-id="{{ book.id }}" class="btn btn-outline-primary float-right js-add-book-collection">Ajouter
-                à ma collection</a>
-        {% else %}
-            <span class="btn btn-outline-primary float-right">Déjà dans votre collection</span>
+        {% if app.user %}
+            {% if not user_book %}
+                <a href="" data-book-id="{{ book.id }}"
+                   class="btn btn-outline-primary float-right js-add-book-collection">Ajouter
+                    à ma collection</a>
+            {% else %}
+                <span class="btn btn-outline-primary float-right">Déjà dans votre collection</span>
+            {% endif %}
         {% endif %}
-    {% endif %}
     </div>
 
 
-    <div class="row">
+    <div class="row mb-lg-5">
         <div class="col-lg-7">
             <h1>{{ book.title }}</h1>
             <h2>
@@ -34,16 +35,28 @@
     </div>
 
     <h2>Tome</h2>
-    <div class="row">
+
+    <div class="row mt-lg-5">
         {% for tome in book.tomes %}
-            <div class="col-lg-2 text-center">
-                <a href="{{ path('app_tome_show', {slug: tome.slug}) }}">
-                    {{ tome.title }}
+            <div class="col-lg-3 mt-lg-4">
+                <div class="card">
                     {% set cover = tome | cover_public_path %}
                     {% if cover %}
-                        <img src="{{ cover }}" alt="{{ book.title }}" class="img-fluid"/>
+                        <img src="{{ cover }}" alt="{{ book.title }}" class="img-fluid card-img-top"/>
                     {% endif %}
-                </a>
+                    <div class="card-body">
+                        <h6 class="card-title">{{ tome.title }}</h6>
+                        {% if app.user %}
+                            {% if user_tomes[tome.id] is defined %}
+                                <span class="btn btn-outline-success btn-block"><i class="far fa-check-square"></i> Lu</span>
+                            {% else %}
+                                <a href="#" class="btn btn-outline-secondary btn-block js-read-tome"
+                                   data-tome-id="{{ tome.id }}"><i class="far fa-square"></i> J'ai lu</a>
+                            {% endif %}
+                        {% endif %}
+                        <a href="{{ path('app_tome_show', {slug: tome.slug}) }}" class="btn btn-outline-primary btn-block"><i class="far fa-eye"></i> Voir</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>
