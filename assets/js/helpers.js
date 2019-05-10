@@ -17,11 +17,16 @@ function waiting() {
 
 function templateBook({title, cover_url, url}) {
   return `
-    <div class="col-lg-3 text-center">
-      <a href="${url}">
-          ${title}
-          <img src="${cover_url}" alt="${title}" class="img-fluid"/>
-      </a>
+    <div class="col-lg-3 mt-lg-4">  
+        <div class="card">
+          <img src="${cover_url}" alt="${title}" class="img-fluid card-img-top"/>
+          <div class="card-body">
+              <h6 class="card-title">${title}</h6>
+              <a href="${url}" class="btn btn-outline-primary btn-block">
+                  <i class="far fa-eye"></i> Voir
+              </a>
+          </div>
+      </div>
     </div>
   `;
 }

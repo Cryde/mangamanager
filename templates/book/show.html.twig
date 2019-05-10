@@ -42,7 +42,7 @@
                 <div class="card">
                     {% set cover = tome | cover_public_path %}
                     {% if cover %}
-                        <img src="{{ cover }}" alt="{{ book.title }}" class="img-fluid card-img-top"/>
+                        <img src="{{ cover }}" alt="{{ tome.title }}" class="img-fluid card-img-top"/>
                     {% endif %}
                     <div class="card-body">
                         <h6 class="card-title">{{ tome.title }}</h6>

@@ -1,6 +1,12 @@
-<a href="{{ path('app_book_show', {slug: book.slug}) }}">
-    {{ book.title }}
-    {% if book.coverUrl %}
-        <img src="{{ book | cover_public_path }}" alt="{{ book.title }}" class="img-fluid"/>
+<div class="card">
+    {% set cover = book | cover_public_path %}
+    {% if cover %}
+        <img src="{{ cover }}" alt="{{ book.title }}" class="img-fluid card-img-top"/>
     {% endif %}
-</a>
+    <div class="card-body">
+        <h6 class="card-title">{{ book.title }}</h6>
+        <a href="{{ path('app_book_show', {slug: book.slug}) }}" class="btn btn-outline-primary btn-block">
+            <i class="far fa-eye"></i> Voir
+        </a>
+    </div>
+</div>
