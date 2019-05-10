@@ -8,10 +8,10 @@
         {% if app.user %}
             {% if not user_book %}
                 <a href="" data-book-id="{{ book.id }}"
-                   class="btn btn-outline-primary float-right js-add-book-collection">Ajouter
+                   class="btn btn-outline-primary float-right js-add-book-collection"><i class="fas fa-plus"></i> Ajouter
                     à ma collection</a>
             {% else %}
-                <span class="btn btn-outline-primary float-right">Déjà dans votre collection</span>
+                <span class="btn btn-outline-success float-right"><i class="fas fa-check"></i> Dans votre collection</span>
             {% endif %}
         {% endif %}
     </div>

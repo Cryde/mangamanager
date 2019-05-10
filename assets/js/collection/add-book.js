@@ -12,13 +12,19 @@ function handleAddToCollectionClick() {
     return;
   }
 
-  element.addEventListener('click', function (e) {
+  element.addEventListener('click', function clickAddBookCollection(e) {
     e.preventDefault();
 
     const bookId = this.getAttribute('data-book-id');
 
     addToCollection(bookId)
     .then(() => {
+
+
+      element.classList.remove('btn-outline-primary');
+      element.classList.add('btn-outline-success');
+      element.removeEventListener('click', clickAddBookCollection);
+      element.innerHTML = `<i class="fas fa-check"></i> Dans votre collection`;
     })
   });
 }
