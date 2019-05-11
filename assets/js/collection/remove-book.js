@@ -15,7 +15,7 @@ function handleRemoveFromCollectionClick() {
     element.addEventListener('click', function clickRemoveBookCollection(e) {
       e.preventDefault();
 
-      if (confirm(`Êtes vous sur de vouloir supprimer ce manga de votre collection ? Vous perdrez l'avancée lié à ce manga`)) {
+      if (confirm(`Êtes vous sur de vouloir supprimer ce manga de votre collection ? Vous perdrez l'avancée liée à ce manga`)) {
 
         const bookId = this.getAttribute('data-book-id');
 
