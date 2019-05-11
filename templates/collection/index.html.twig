@@ -10,7 +10,7 @@
         <div class="row">
             {% for user_book in user_books %}
                 <div class="col-lg-3 text-center">
-                    {% include 'book/_book_display.html.twig' with {book: user_book.book} %}
+                    {% include 'book/_book_display.html.twig' with {book: user_book.book, user_book: user_book} only %}
                 </div>
             {% endfor %}
         </div>

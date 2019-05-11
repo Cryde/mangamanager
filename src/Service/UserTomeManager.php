@@ -65,6 +65,30 @@ class UserTomeManager
         return $userTome;
     }
 
+    /**
+     * @param User $user
+     * @param Book $book
+     */
+    public function removeByUserAndBook(User $user, Book $book)
+    {
+        /** @var UserTome $userTome */
+        if (!$userTomes = $this->userTomeRepository->findBy(['user' => $user, 'book' => $book])) {
+            return;
+        }
+
+        foreach ($userTomes as $userTome) {
+            $this->entityManager->remove($userTome);
+        }
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @param User $user
+     * @param Book $book
+     *
+     * @return int
+     */
     private function countReadTomeByBook(User $user, Book $book)
     {
         return count($this->userTomeRepository->findBy(['user' => $user, 'book' => $book]));

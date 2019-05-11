@@ -51,4 +51,15 @@ class UserBookManager
 
         return $userBook;
     }
+
+    public function removeByUser(User $user, Book $book)
+    {
+        /** @var UserBook $userBook */
+        if (!$userBook = $this->userBookRepository->findOneBy(['user' => $user, 'book' => $book])) {
+            throw new \InvalidArgumentException('Ce manga n\'existe pas dans votre collection');
+        }
+
+        $this->entityManager->remove($userBook);
+        $this->entityManager->flush();
+    }
 }

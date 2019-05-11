@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card book-element">
     {% set cover = book | cover_public_path %}
     {% if cover %}
         <img src="{{ cover }}" alt="{{ book.title }}" class="img-fluid card-img-top"/>
@@ -8,5 +8,10 @@
         <a href="{{ path('app_book_show', {slug: book.slug}) }}" class="btn btn-outline-primary btn-block">
             <i class="far fa-eye"></i> Voir
         </a>
+        {% if user_book is defined %}
+            <a href="#" data-book-id="{{ book.id }}" class="btn btn-outline-danger btn-block js-remove-book-collection">
+                <i class="fas fa-trash-alt"></i> Supprimer
+            </a>
+        {% endif %}
     </div>
 </div>
