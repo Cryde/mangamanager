@@ -22,7 +22,7 @@ class CollectionController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function add(Book $book, UserBookManager $userBookManager)
+    public function addBook(Book $book, UserBookManager $userBookManager)
     {
         $userBook = $userBookManager->addByUser($this->getUser(),$book);
 
