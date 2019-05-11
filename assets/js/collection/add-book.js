@@ -1,34 +1,51 @@
-export {handleAddBook};
+export {handleAddBook, removeAddToCollectionEventListeners};
 
 function handleAddBook() {
   handleAddToCollectionClick();
 }
 
-
 function handleAddToCollectionClick() {
-  const element = document.querySelector('.js-add-book-collection');
+  const elements = getElements();
 
-  if (!element) {
+  if (!elements.length) {
     return;
   }
 
-  element.addEventListener('click', function clickAddBookCollection(e) {
-    e.preventDefault();
-
-    const bookId = this.getAttribute('data-book-id');
-
-    addToCollection(bookId)
-    .then(() => {
-
-
-      element.classList.remove('btn-outline-primary');
-      element.classList.add('btn-outline-success');
-      element.removeEventListener('click', clickAddBookCollection);
-      element.innerHTML = `<i class="fas fa-check"></i> Dans votre collection`;
-    })
+  elements.forEach( (element) => {
+    element.addEventListener('click', clickAddBookCollection);
   });
 }
 
+function removeAddToCollectionEventListeners() {
+
+  const elements = getElements();
+
+  if (!elements.length) {
+    return;
+  }
+
+  elements.forEach( (element) => {
+    element.removeEventListener('click', clickAddBookCollection);
+  });
+}
+
+function getElements() {
+  return Array.prototype.slice.call(document.querySelectorAll('.js-add-book-collection'));
+}
+
+function clickAddBookCollection(e) {
+  e.preventDefault();
+
+  const bookId = this.getAttribute('data-book-id');
+
+  addToCollection(bookId)
+  .then(() => {
+    this.classList.remove('btn-outline-primary');
+    this.classList.add('btn-outline-success');
+    this.removeEventListener('click', clickAddBookCollection);
+    this.innerHTML = `<i class="fas fa-check"></i> Dans votre collection`;
+  })
+}
 
 function addToCollection(id) {
   const url = Routing.generate('api_collection_book_add', {id});

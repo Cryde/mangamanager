@@ -51,6 +51,7 @@ class BookArraySerializer
     public function toArray(Book $book): array
     {
         return [
+            'id'        => $book->getId(),
             'title'     => $book->getTitle(),
             'url'       => $this->router->generate('app_book_show', ['slug' => $book->getSlug()]),
             'cover_url' => $this->coverPublicPathConverter->getCoverPathFromBook($book),

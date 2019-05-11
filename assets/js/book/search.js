@@ -1,4 +1,5 @@
 import {waiting, templateBook} from "../helpers";
+import {handleAddBook, removeAddToCollectionEventListeners} from "../collection/add-book";
 
 export {handleSearch};
 
@@ -21,6 +22,7 @@ function handleSearch() {
       e.preventDefault();
       const value = this.value;
       if (value.length > 3 && lastSearch !== value) {
+        removeAddToCollectionEventListeners();
         resultContainer.innerHTML = waiting();
         lastSearch = value;
         launchSearch(value);
@@ -40,7 +42,9 @@ function getResult(q) {
 
 function displayResults(results) {
 
-  const books = results.data;
+  const books = results.data.books;
+  const userBooks = results.data.user_books;
+  const userLogged = results.data.user_logged;
 
   if(!books.length) {
     displayNoResult();
@@ -50,10 +54,21 @@ function displayResults(results) {
   let htmlResult = '';
 
   for (const book of books) {
-    htmlResult += templateBook(book);
+    htmlResult += templateBook(book, userLogged, isBookInUserBooks(book.id, userBooks));
   }
 
   resultContainer.innerHTML = htmlResult;
+  handleAddBook();
+}
+
+function isBookInUserBooks(bookId, userBooks) {
+  for(const userBook of userBooks) {
+    if(userBook.book_id === bookId) {
+      return true;
+    }
+  }
+
+  return false
 }
 
 function displayNoResult() {
