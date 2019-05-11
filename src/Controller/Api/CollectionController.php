@@ -2,14 +2,12 @@
 
 namespace App\Controller\Api;
 
-use App\Builder\UserBookDirector;
 use App\Builder\UserTomeDirector;
 use App\Entity\Book;
 use App\Entity\Tome;
-use App\Entity\UserBook;
-use App\Entity\UserTome;
-use App\Repository\UserBookRepository;
 use App\Repository\UserTomeRepository;
+use App\Service\UserBookManager;
+use App\Service\UserTomeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,32 +17,18 @@ class CollectionController extends AbstractController
     /**
      * @Route("/api/collection/book/{id}/add", name="api_collection_book_add", options={"expose"=true})
      *
-     * @param Book               $book
-     * @param UserBookRepository $userBookRepository
-     * @param UserBookDirector   $userBookDirector
+     * @param Book            $book
+     * @param UserBookManager $userBookManager
      *
      * @return JsonResponse
      */
-    public function add(Book $book, UserBookRepository $userBookRepository, UserBookDirector $userBookDirector)
+    public function add(Book $book, UserBookManager $userBookManager)
     {
-        /** @var UserBook $userBook */
-        if ($userBook = $userBookRepository->findBy(['user' => $this->getUser(), 'book' => $book])) {
-            return $this->json([
-                'data' => [
-                    'id'  => $userBook->getId(),
-                    'url' => 'todo',
-                ],
-            ]);
-        }
-
-        $userBook = $userBookDirector->create($this->getUser(), $book);
-        $this->getDoctrine()->getManager()->persist($userBook);
-        $this->getDoctrine()->getManager()->flush();
+        $userBook = $userBookManager->addByUser($this->getUser(),$book);
 
         return $this->json([
             'data' => [
                 'id'  => $userBook->getId(),
-                'url' => 'todo',
             ],
         ]);
     }
@@ -52,32 +36,18 @@ class CollectionController extends AbstractController
     /**
      * @Route("/api/collection/tome/{id}/add", name="api_collection_tome_add", options={"expose"=true})
      *
-     * @param Tome               $tome
-     * @param UserTomeRepository $userTomeRepository
-     * @param UserTomeDirector   $userTomeDirector
+     * @param Tome            $tome
+     * @param UserTomeManager $userTomeManager
      *
      * @return JsonResponse
      */
-    public function addTome(Tome $tome, UserTomeRepository $userTomeRepository, UserTomeDirector $userTomeDirector)
+    public function addTome(Tome $tome, UserTomeManager $userTomeManager)
     {
-        /** @var UserTome $userTome */
-        if ($userTome = $userTomeRepository->findBy(['user' => $this->getUser(), 'tome' => $tome])) {
-            return $this->json([
-                'data' => [
-                    'id'  => $userTome->getId(),
-                    'url' => 'todo',
-                ],
-            ]);
-        }
-
-        $userTome = $userTomeDirector->create($this->getUser(), $tome, $tome->getBook());
-        $this->getDoctrine()->getManager()->persist($userTome);
-        $this->getDoctrine()->getManager()->flush();
+        $userTome = $userTomeManager->addByUser($this->getUser(), $tome);
 
         return $this->json([
             'data' => [
-                'id'  => $userTome->getId(),
-                'url' => 'todo',
+                'id' => $userTome->getId(),
             ],
         ]);
     }

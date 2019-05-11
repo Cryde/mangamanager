@@ -36,9 +36,15 @@ class UserBook
      */
     private $creationDatetime;
 
+    /**
+     * @ORM\Column(type="integer", nullable=false, options={"default" : 0})
+     */
+    private $readTomeNumber;
+
     public function __construct()
     {
         $this->creationDatetime = new \DateTime();
+        $this->readTomeNumber = 0;
     }
 
     public function getId(): ?int
@@ -78,6 +84,18 @@ class UserBook
     public function setCreationDatetime(\DateTimeInterface $creationDatetime): self
     {
         $this->creationDatetime = $creationDatetime;
+
+        return $this;
+    }
+
+    public function getReadTomeNumber(): ?int
+    {
+        return $this->readTomeNumber;
+    }
+
+    public function setReadTomeNumber(?int $readTomeNumber): self
+    {
+        $this->readTomeNumber = $readTomeNumber;
 
         return $this;
     }
