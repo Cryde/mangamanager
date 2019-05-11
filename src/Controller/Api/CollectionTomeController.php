@@ -6,33 +6,13 @@ use App\Builder\UserTomeDirector;
 use App\Entity\Book;
 use App\Entity\Tome;
 use App\Repository\UserTomeRepository;
-use App\Service\UserBookManager;
 use App\Service\UserTomeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CollectionController extends AbstractController
+class CollectionTomeController extends AbstractController
 {
-    /**
-     * @Route("/api/collection/book/{id}/add", name="api_collection_book_add", options={"expose"=true})
-     *
-     * @param Book            $book
-     * @param UserBookManager $userBookManager
-     *
-     * @return JsonResponse
-     */
-    public function addBook(Book $book, UserBookManager $userBookManager)
-    {
-        $userBook = $userBookManager->addByUser($this->getUser(),$book);
-
-        return $this->json([
-            'data' => [
-                'id'  => $userBook->getId(),
-            ],
-        ]);
-    }
-
     /**
      * @Route("/api/collection/tome/{id}/add", name="api_collection_tome_add", options={"expose"=true})
      *
@@ -41,13 +21,14 @@ class CollectionController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function addTome(Tome $tome, UserTomeManager $userTomeManager)
+    public function add(Tome $tome, UserTomeManager $userTomeManager)
     {
         $userTome = $userTomeManager->addByUser($this->getUser(), $tome);
 
         return $this->json([
             'data' => [
-                'id' => $userTome->getId(),
+                'tome'      => ['id' => $tome->getId()],
+                'user_tome' => ['id' => $userTome->getId()],
             ],
         ]);
     }
