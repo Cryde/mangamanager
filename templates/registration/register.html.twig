@@ -12,8 +12,11 @@
 
             {{ form_start(registrationForm, {attr: {class: 'form-signin'}}) }}
             {{ form_widget(registrationForm.email) }}
+            {{ form_errors(registrationForm.email) }}
             {{ form_widget(registrationForm.username) }}
+            {{ form_errors(registrationForm.username) }}
             {{ form_widget(registrationForm.plainPassword) }}
+            {{ form_errors(registrationForm.plainPassword) }}
 
             <button class="btn btn-outline-success btn-block mt-lg-4"><i class="fas fa-user-plus"></i> S'inscrire</button>
             {{ form_end(registrationForm) }}

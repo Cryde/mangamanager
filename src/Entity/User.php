@@ -10,7 +10,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Cet email est déjà en cours d'utilisation")
+ * @UniqueEntity(fields={"username"}, message="Désolé, ce nom d'utilisateur est déjà pris")
  */
 class User implements UserInterface
 {
@@ -52,8 +53,14 @@ class User implements UserInterface
      */
     private $userTomes;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creationDatetime;
+
     public function __construct()
     {
+        $this->creationDatetime = new \DateTime();
         $this->userBooks = new ArrayCollection();
         $this->userTomes = new ArrayCollection();
     }
@@ -201,6 +208,18 @@ class User implements UserInterface
                 $userTome->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreationDatetime(): ?\DateTimeInterface
+    {
+        return $this->creationDatetime;
+    }
+
+    public function setCreationDatetime(\DateTimeInterface $creationDatetime): self
+    {
+        $this->creationDatetime = $creationDatetime;
 
         return $this;
     }
