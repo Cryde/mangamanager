@@ -23,6 +23,7 @@ class BookRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('book')
             ->where('book.title LIKE :title')
+            ->andWhere('book.coverPath is not null')
             ->setParameter('title', '%' . $title . '%')
             ->setMaxResults($limit)
             ->getQuery()
@@ -37,6 +38,7 @@ class BookRepository extends ServiceEntityRepository
     public function getRandom($limit = 4)
     {
         return $this->createQueryBuilder('book')
+            ->where('book.coverPath is not null')
             ->addOrderBy('RAND()')
             ->setMaxResults($limit)
             ->getQuery()
