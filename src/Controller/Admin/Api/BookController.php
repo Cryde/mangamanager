@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     /**
-     * @Route("/admin/api/book/add", name="admin_api_author_add", methods={"POST"})
+     * @Route("/admin/api/book/add", name="admin_api_book_add", methods={"POST"})
      *
      * @param Request              $request
      * @param Jsonizer             $jsonizer
