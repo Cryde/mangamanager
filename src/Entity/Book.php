@@ -73,6 +73,11 @@ class Book
      */
     private $coverPath;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $tomeNumber;
+
     public function __construct()
     {
         $this->creationDatetime = new \DateTimeImmutable();
@@ -258,6 +263,18 @@ class Book
     public function setCoverPath(?string $coverPath): self
     {
         $this->coverPath = $coverPath;
+
+        return $this;
+    }
+
+    public function getTomeNumber(): ?int
+    {
+        return $this->tomeNumber;
+    }
+
+    public function setTomeNumber(?int $tomeNumber): self
+    {
+        $this->tomeNumber = $tomeNumber;
 
         return $this;
     }
