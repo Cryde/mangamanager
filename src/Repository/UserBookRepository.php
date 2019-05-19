@@ -29,16 +29,18 @@ class UserBookRepository extends ServiceEntityRepository
      */
     public function findInProgressByUserAndExcluded(User $user, $excludedBooks)
     {
-        return $this->createQueryBuilder('user_book')
+        $qb = $this->createQueryBuilder('user_book')
             ->select('user_book, book')
             ->join('user_book.book', 'book')
             ->andWhere('user_book.readTomeNumber <= book.tomeNumber')
             ->andWhere('user_book.user = :user')
-            ->andWhere('user_book not in (:excluded)')
-            ->setParameter('user', $user)
-            ->setParameter('excluded', $excludedBooks)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('user', $user);
+
+        if ($excludedBooks) {
+            $qb->andWhere('user_book not in (:excluded)')->setParameter('excluded', $excludedBooks);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
