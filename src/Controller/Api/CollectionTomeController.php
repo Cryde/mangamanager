@@ -36,19 +36,15 @@ class CollectionTomeController extends AbstractController
     /**
      * @Route("/api/collection/book/{id}/tome/add-all", name="api_collection_book_add_all_tome", options={"expose"=true})
      *
-     * @param Book               $book
-     * @param UserTomeRepository $userTomeRepository
-     * @param UserTomeDirector   $userTomeDirector
+     * @param Book            $book
+     * @param UserTomeManager $userTomeManager
      *
      * @return JsonResponse
      */
-    public function addAllTome(Book $book, UserTomeRepository $userTomeRepository, UserTomeDirector $userTomeDirector)
+    public function addAllTome(Book $book, UserTomeManager $userTomeManager)
     {
         foreach ($book->getTomes() as $tome) {
-            if (!$userTomeRepository->findBy(['user' => $this->getUser(), 'tome' => $tome])) {
-                $userTome = $userTomeDirector->create($this->getUser(), $tome, $tome->getBook());
-                $this->getDoctrine()->getManager()->persist($userTome);
-            }
+            $userTomeManager->addByUser($this->getUser(), $tome);
         }
 
         $this->getDoctrine()->getManager()->flush();

@@ -34,9 +34,19 @@
         </div>
     </div>
 
+    <div class="">
+        {% if app.user %}
+            {% if user_book.readTomeNumber != book.tomeNumber %}
+                <a href="" data-book-id="{{ book.id }}"
+                   class="btn btn-outline-primary float-right js-add-all-tome-collection"><i class="fas fa-plus"></i> J'ai tout lu</a>
+            {% else %}
+                <span class="btn btn-outline-success float-right"><i class="fas fa-check"></i> J'ai tout lu</span>
+            {% endif %}
+        {% endif %}
+    </div>
     <h2>Tome</h2>
 
-    <div class="row mt-lg-5">
+    <div class="row mt-lg-5 book">
         {% for tome in book.tomes %}
             <div class="col-lg-3 mt-lg-4">
                 <div class="card">
