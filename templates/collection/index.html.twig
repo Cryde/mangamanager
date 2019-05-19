@@ -7,6 +7,7 @@
     <h1 class="mb-lg-5">Ma collection</h1>
 
     {% if user_books %}
+        <h4 class="mt-lg-5 mb-lg-5 text-uppercase">Manga en cours de lecture</h4>
         <div class="row">
             {% for user_book in user_books %}
                 <div class="col-lg-3 text-center">
@@ -14,7 +15,24 @@
                 </div>
             {% endfor %}
         </div>
-    {% else %}
+    {% endif %}
+
+
+    {% if user_books_read_finish %}
+        <hr class="mt-lg-5">
+        <h4 class="mt-lg-5 mb-lg-5 text-uppercase">Manga totalement lu et fini</h4>
+
+        <div class="row">
+            {% for user_book in user_books_read_finish %}
+                <div class="col-lg-3 text-center">
+                    {% include 'book/_book_display.html.twig' with {book: user_book.book, user_book: user_book} only %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    {% if not user_books_read_finish and not user_books %}
         <p>
             Vous n'avez pas encore de manga dans votre collection.<br/>
             Vous pouvez en chercher via <a href="{{ path('app_book') }}">la recherche</a>

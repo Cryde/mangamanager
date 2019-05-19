@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\BookStatus;
+use App\Entity\User;
 use App\Entity\UserBook;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,32 +21,43 @@ class UserBookRepository extends ServiceEntityRepository
         parent::__construct($registry, UserBook::class);
     }
 
-    // /**
-    //  * @return UserBook[] Returns an array of UserBook objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param User $user
+     * @param      $excludedBooks
+     *
+     * @return mixed
+     */
+    public function findInProgressByUserAndExcluded(User $user, $excludedBooks)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('user_book')
+            ->select('user_book, book')
+            ->join('user_book.book', 'book')
+            ->andWhere('user_book.readTomeNumber <= book.tomeNumber')
+            ->andWhere('user_book.user = :user')
+            ->andWhere('user_book not in (:excluded)')
+            ->setParameter('user', $user)
+            ->setParameter('excluded', $excludedBooks)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?UserBook
+    /**
+     * @param User       $user
+     * @param BookStatus $bookStatus
+     *
+     * @return mixed
+     */
+    public function findAllReadAndEndedBookByUser(User $user, BookStatus $bookStatus)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('user_book')
+            ->select('user_book, book')
+            ->join('user_book.book', 'book')
+            ->where('book.status = :status')
+            ->andWhere('user_book.readTomeNumber = book.tomeNumber')
+            ->andWhere('user_book.user = :user')
+            ->setParameter('status', $bookStatus)
+            ->setParameter('user', $user)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }
