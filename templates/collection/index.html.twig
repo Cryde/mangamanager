@@ -10,8 +10,13 @@
         <h4 class="mt-lg-5 mb-lg-5 text-uppercase">Manga en cours de lecture</h4>
         <div class="row">
             {% for user_book in user_books %}
-                <div class="col-lg-3 text-center">
-                    {% include 'book/_book_display.html.twig' with {book: user_book.book, user_book: user_book} only %}
+                <div class="col-lg-6">
+                    {% include 'book/_book_display_collection.html.twig' with {
+                        book: user_book.book,
+                        user_book: user_book,
+                        in_progress: true,
+                        percent: (user_book.readTomeNumber * 100  / user_book.book.tomeNumber )
+                    } only %}
                 </div>
             {% endfor %}
         </div>
@@ -25,7 +30,7 @@
         <div class="row">
             {% for user_book in user_books_read_finish %}
                 <div class="col-lg-3 text-center">
-                    {% include 'book/_book_display.html.twig' with {book: user_book.book, user_book: user_book} only %}
+                    {% include 'book/_book_display.html.twig' with {book: user_book.book, user_book: user_book, in_progress: false} only %}
                 </div>
             {% endfor %}
         </div>

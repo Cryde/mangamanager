@@ -2,8 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Book;
 use App\Entity\Tome;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +22,23 @@ class TomeRepository extends ServiceEntityRepository
         parent::__construct($registry, Tome::class);
     }
 
-    // /**
-    //  * @return Tome[] Returns an array of Tome objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Book $book
+     * @param int  $tomeNumber
+     *
+     * @return mixed
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getNextTome(Book $book, int $tomeNumber)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('tome')
+            ->where('tome.coverPath is not null')
+            ->andWhere('tome.number = :tomeNumber')
+            ->andWhere('tome.book = :book')
+            ->setParameter('tomeNumber', $tomeNumber + 1)
+            ->setParameter('book', $book)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getSingleResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Tome
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

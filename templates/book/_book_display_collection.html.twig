@@ -1,0 +1,40 @@
+<div class="card mb-3 border-0" style="max-width: 540px;">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            {% set cover = book | cover_public_path %}
+            {% if cover %}
+                <div class="book-image-container">
+                    <img src="{{ cover }}" alt="{{ book.title }}" class="img-fluid"/>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                {% if user_book is defined %}
+                    <a href="#" data-book-id="{{ book.id }}" class="btn btn-danger btn-sm js-remove-book-collection float-right">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                {% endif %}
+                <a href="{{ path('app_book_show', {slug: book.slug}) }}" class="btn btn-sm btn-outline-primary float-right mr-1">
+                    <i class="far fa-eye"></i>
+                </a>
+
+                <h5 class="card-title">{{ book.title }}</h5>
+
+                {% if user_book is defined and in_progress is defined and in_progress %}
+                    <div class="progress mb-lg-3 mt-lg-4">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ percent }}%" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    {% if percent == 100 %}
+                        <span>En attente du prochain tome.</span>
+                    {% else %}
+                        <span>Prochain volume : </span>
+                        {% set next_tome = next_tome(user_book) %}
+                        <a href="{{ path('app_tome_show', {slug: next_tome.slug}) }}">{{ next_tome.title }}</a>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>

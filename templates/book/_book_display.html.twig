@@ -5,6 +5,7 @@
     {% endif %}
     <div class="card-body">
         <h6 class="card-title">{{ book.title }}</h6>
+
         <a href="{{ path('app_book_show', {slug: book.slug}) }}" class="btn btn-outline-primary btn-block">
             <i class="far fa-eye"></i> Voir
         </a>
