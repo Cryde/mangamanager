@@ -1362,16 +1362,16 @@
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
-            "version": "2.3.1",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "f6c9ee6857bce5924fbd54d4c6176a4dfa9de5b4"
+                "reference": "e42ed450eac2b61d5fcba9cd834c294a429e9a40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/f6c9ee6857bce5924fbd54d4c6176a4dfa9de5b4",
-                "reference": "f6c9ee6857bce5924fbd54d4c6176a4dfa9de5b4",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/e42ed450eac2b61d5fcba9cd834c294a429e9a40",
+                "reference": "e42ed450eac2b61d5fcba9cd834c294a429e9a40",
                 "shasum": ""
             },
             "require": {
@@ -1405,12 +1405,12 @@
             ],
             "authors": [
                 {
-                    "name": "FriendsOfSymfony Community",
-                    "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
-                },
-                {
                     "name": "William Durand",
                     "email": "will+git@drnd.me"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
                 }
             ],
             "description": "A pretty nice way to expose your Symfony2 routing to client applications.",
@@ -1420,7 +1420,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2019-06-17T18:22:41+00:00"
+            "time": "2019-08-10T15:40:05+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -4880,16 +4880,16 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "bbf3b52653dae353259c1761cbb6f8f056dff03e"
+                "reference": "ff127edf8c015d3a3922b0dd56ffa2c2508a7fda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/bbf3b52653dae353259c1761cbb6f8f056dff03e",
-                "reference": "bbf3b52653dae353259c1761cbb6f8f056dff03e",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/ff127edf8c015d3a3922b0dd56ffa2c2508a7fda",
+                "reference": "ff127edf8c015d3a3922b0dd56ffa2c2508a7fda",
                 "shasum": ""
             },
             "require": {
@@ -4956,7 +4956,7 @@
             ],
             "description": "Symfony Serializer Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-17T17:37:00+00:00"
+            "time": "2019-07-23T14:59:17+00:00"
         },
         {
             "name": "symfony/serializer-pack",
@@ -5854,19 +5854,19 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
+                    "role": "Lead Developer",
                     "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "homepage": "http://fabien.potencier.org"
                 },
                 {
                     "name": "Armin Ronacher",
-                    "email": "armin.ronacher@active-4.com",
-                    "role": "Project Founder"
+                    "role": "Project Founder",
+                    "email": "armin.ronacher@active-4.com"
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "https://twig.symfony.com/contributors",
-                    "role": "Contributors"
+                    "role": "Contributors",
+                    "homepage": "https://twig.symfony.com/contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
