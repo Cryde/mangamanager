@@ -26,7 +26,7 @@
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.5",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "5.1.*"
     },
     "require-dev": {
         "deployer/recipes": "^6.2",
